@@ -41,6 +41,7 @@
             "src/Provider/URLBuilder.js",
 
             "src/Renderer/ColorLayersOrdering.js",
+            "src/Renderer/OrientedImageCamera.js",
             "src/Renderer/ThreeExtended/Feature2Mesh.js",
             "src/Renderer/ThreeExtended/GlobeControls.js",
             "src/Renderer/ThreeExtended/StateControl.js",
