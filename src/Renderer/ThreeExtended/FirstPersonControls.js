@@ -146,7 +146,7 @@ class FirstPersonControls extends THREE.EventDispatcher {
 
         for (const move of this.moves) {
             if (move.method === 'translateY') {
-                this.camera.position.z += move.sign * this.options.moveSpeed * dt / 1000;
+                this.translateY(move.sign, dt);
             } else {
                 this.camera[move.method](move.sign * this.options.moveSpeed * dt / 1000);
             }
@@ -159,6 +159,10 @@ class FirstPersonControls extends THREE.EventDispatcher {
         if (this.moves.size) {
             this.view.notifyChange(this.view.camera.camera3D);
         }
+    }
+
+    translateY(dt, sign) {
+        this.camera.position.z += sign * this.options.moveSpeed * dt / 1000;
     }
 
     // Event callback functions
