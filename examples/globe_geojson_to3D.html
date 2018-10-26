@@ -53,24 +53,19 @@
 
             ariege = new itowns.GeometryLayer('ariege', new itowns.THREE.Group());
             ariege.update = itowns.FeatureProcessing.update;
-            ariege.convert = itowns.Feature2Mesh.convert({
-                color: color,
-                extrude: extrude });
-
+            ariege.convert = itowns.Feature2Mesh.convert({color: color,extrude: extrude });
             ariege.source = {
-                url: 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements/09-ariege/departement-09-ariege.geojson',
-                protocol: 'file',
-                projection: 'EPSG:4326',
-                format: 'application/json',
-                zoom: { min: 7, max: 7 },
-            };
-
-            view.addLayer(ariege).then(function menue(layer) {
-                var gui = debug.GeometryDebug
-                    .createGeometryDebugUI(menuGlobe.gui, view, layer);
-                debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
-            });
-
+            // url: 'https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements/09-ariege/departement-09-ariege.geojson',
+            url: 'http://localhost/demo-numen/data/building/74042/buildings/geojson.geojson',
+            // url:'http://rks1409w171.ign.fr/demo-numen/data/building/74042/buildings/geojson.geojson',
+            protocol: 'file',projection: 'EPSG:4326',format: 'application/json',
+            // Access-Control-Allow-Origin : 'http://127.0.0.1',
+            zoom: { min: 7, max: 7 },
+        };
+        console.log(ariege);view.addLayer(ariege).then(function menue(layer){
+            var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
+            debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
+        });
             menuGlobe = new GuiTools('menuDiv', view);
 </script>
 </body>
