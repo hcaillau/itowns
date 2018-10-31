@@ -60,7 +60,7 @@
             // url:'http://rks1409w171.ign.fr/demo-numen/data/building/74042/buildings/geojson.geojson',
             protocol: 'file',projection: 'EPSG:4326',format: 'application/json',
             // Access-Control-Allow-Origin : 'http://127.0.0.1',
-            zoom: { min: 7, max: 7 },
+            zoom: { min: 0, max: 10 },
         };
         console.log(ariege);view.addLayer(ariege).then(function menue(layer){
             var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
