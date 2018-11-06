@@ -255,15 +255,32 @@ function area(contour, offset, count) {
 }
 
 function featureToExtrudedPolygon(feature, options) {
+    // console.log(feature);
+    // ptsIn = Tableau de toutes les coordonnées individualisées (identique a chaque feature)
     const ptsIn = feature.vertices;
+
+    // normals = Tableau de toutes les normales (identique a chaque feature)
+    // ptsIn.length = normals.length
+    const normals = feature.normals;
+
+    // offset = détermine le début des coordonnées dans ptsIn et normals
     const offset = feature.geometry[0].indices[0].offset;
+
+    // count = détermine le nombre coordonnées dans ptsIn ou normals
+    // a prendre en compte à partir de l'index offset
     const count = feature.geometry[0].indices[0].count;
+
+    // TODO comprendre la ligne
     const isClockWise = area(ptsIn, offset, count) < 0;
 
-    const normals = feature.normals;
+    // Tableau initialisé a nul
+    // dont la taille correspond au double du nombre de coordonnées
     const vertices = new Float32Array(ptsIn.length * 2);
+    // Tableau de couleurs initialisé a nul
+    // dont la taille correspond au double du nombre de coordonnées
     const colors = new Uint8Array(ptsIn.length * 2);
     const indices = [];
+
     const totalVertices = ptsIn.length / 3;
 
     vertices.minAltitude = Infinity;
@@ -271,7 +288,6 @@ function featureToExtrudedPolygon(feature, options) {
     for (const geometry of feature.geometry) {
         const altitude = getProperty('altitude', options, 0, geometry.properties);
         const extrude = getProperty('extrude', options, 0, geometry.properties);
-
         const colorTop = getProperty('color', options, randomColor, geometry.properties);
         color.copy(colorTop);
         color.multiplyScalar(0.6);
@@ -314,7 +330,7 @@ function featureToExtrudedPolygon(feature, options) {
     geom.addAttribute('position', new THREE.BufferAttribute(vertices, 3));
     geom.addAttribute('color', new THREE.BufferAttribute(colors, 3, true));
 
-    geom.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+    geom.setIndex(new THREE.BufferAttribute(new Uint32Array(indices), 1));
 
     const mesh = new THREE.Mesh(geom, material);
     mesh.minAltitude = vertices.minAltitude;
@@ -374,7 +390,6 @@ function featuresToThree(features, options) {
     if (features.length == 1) {
         return featureToMesh(features[0], options);
     }
-
     const group = new THREE.Group();
     group.minAltitude = Infinity;
 

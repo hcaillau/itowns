@@ -141,7 +141,7 @@ const GeometryToCoordinates = {
         for (const coords of coordsIn) {
             this[type](feature, crsIn, crsOut, coords, filteringExtent, options);
         }
-
+        // console.log(feature);
         return feature;
     },
 };
@@ -379,7 +379,6 @@ export default {
         if (typeof (json) === 'string') {
             json = JSON.parse(json);
         }
-
         options.crsIn = options.crsIn || readCRS(json);
         options.mergeFeatures = options.mergeFeatures == undefined ? true : options.mergeFeatures;
         options.withNormal = options.withNormal == undefined ? true : options.withNormal;

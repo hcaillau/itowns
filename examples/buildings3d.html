@@ -48,14 +48,15 @@
             }
 
             function altitudeBuildings() {
-            	return 450;
+            	return 500;
             }
 
             function color() {
             	return new itowns.THREE.Color(0xffcc00);
             }
 
-            var path = 'http://localhost:8080/examples/layers/JSONLayers/buildings.geojson';
+            // var path ='https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements/09-ariege/departement-09-ariege.geojson';
+            var path = 'http://localhost:8080/examples/layers/JSONLayers/geojson.geojson';
             buildings = new itowns.GeometryLayer('buildings', new itowns.THREE.Group());
             buildings.update = itowns.FeatureProcessing.update;
             buildings.convert = itowns.Feature2Mesh.convert({
@@ -70,9 +71,9 @@
             	protocol: 'file',
             	projection: 'EPSG:4326',
             	format: 'application/json',
-            	zoom: { min: 1, max: 20 }
+            	zoom: { min: 2, max: 2 }
             };
-            console.log(buildings);view.addLayer(buildings).then(function menue(layer){
+            view.addLayer(buildings).then(function menue(layer){
             	var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);
             	debug.GeometryDebug.addWireFrameCheckbox(gui, view, layer);
             });

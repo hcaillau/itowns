@@ -200,7 +200,6 @@ GlobeView.prototype.addLayer = function addLayer(layer) {
     }
     const layerId = layer.id;
     const layerPromise = View.prototype.addLayer.call(this, layer, this.tileLayer);
-
     this.dispatchEvent({
         type: GLOBE_VIEW_EVENTS.LAYER_ADDED,
         layerId,
