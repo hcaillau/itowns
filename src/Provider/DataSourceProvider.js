@@ -34,7 +34,6 @@ function isValidData(data, extentDestination, validFn) {
 
 function fetchData(url, format, networkOptions, extentSource) {
     const fetcher = supportedFetchers.get(format);
-    console.log('plouf');
     if (fetcher) {
         return fetcher(url, networkOptions).then((d) => {
             d.coords = extentSource;
