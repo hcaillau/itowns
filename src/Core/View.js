@@ -315,7 +315,7 @@ View.prototype.addLayer = function addLayer(layer, parentLayer) {
             resolve(layer);
         })
             .catch((err) => {
-                console.error(err);
+                reject(new Error(err));
             });
     });
 };
