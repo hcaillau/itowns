@@ -57,6 +57,7 @@
 
             var path = 'http://localhost:8080/examples/layers/JSONLayers/geojson.geojson';
             var path = 'http://localhost:8080/examples/layers/JSONLayers/buildings.json';
+            var path = 'http://localhost:8080/examples/layers/JSONLayers/dings.json';
             buildings = new itowns.GeometryLayer('buildings', new itowns.THREE.Group());
             buildings.update = itowns.FeatureProcessing.update;
             buildings.convert = itowns.Feature2Mesh.convert({

@@ -34,10 +34,14 @@ function isValidData(data, extentDestination, validFn) {
 
 function fetchData(url, format, networkOptions, extentSource) {
     const fetcher = supportedFetchers.get(format);
+    console.log('plouf');
     if (fetcher) {
         return fetcher(url, networkOptions).then((d) => {
             d.coords = extentSource;
             return d;
+        })
+        .catch((err) => {
+            console.error(err);
         });
     } else {
         throw new Error('Not supported format, not found fetcher in DataSourceProvider.supportedFetchers');

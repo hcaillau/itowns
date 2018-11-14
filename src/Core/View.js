@@ -256,6 +256,7 @@ function _preprocessLayer(view, layer, provider, parentLayer) {
  * @return {Promise} a promise resolved with the new layer object when it is fully initialized or rejected if any error occurred.
  */
 View.prototype.addLayer = function addLayer(layer, parentLayer) {
+    console.log('ploplo');
     return new Promise((resolve, reject) => {
         if (!layer) {
             reject(new Error('layer is undefined'));
@@ -313,7 +314,10 @@ View.prototype.addLayer = function addLayer(layer, parentLayer) {
                 this.addFrameRequester(MAIN_LOOP_EVENTS.UPDATE_END, this._allLayersAreReadyCallback);
             }
             resolve(layer);
-        });
+        })
+            .catch((err) => {
+                console.error(err);
+            });
     });
 };
 
