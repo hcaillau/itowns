@@ -58,6 +58,7 @@
             var color = new itowns.THREE.Color();
             var tile;
             function altitudeLine(properties, contour) {
+            
                 var result;
                 var z = 0;
                 if (contour) {
@@ -151,7 +152,8 @@
                         mesh.updateMatrixWorld(true);
                     }
                 }
-                meshes = meshes.filter(function filter(m) { return m.scale.z < 1; });
+                meshes = meshes.filter(function filter(m) { return m.scale.z < 10  ; });
+                
             };
 
             view.addFrameRequester(itowns.MAIN_LOOP_EVENTS.BEFORE_RENDER, scaler);

@@ -46,17 +46,27 @@
             function extrude(properties) {
             	return properties.height;
             }
-
-            function altitudeBuildings() {
-            	return 500;
+            var coord = new itowns.Coordinates('EPSG:4978', 0, 0, 0);
+        function altitudeBuildings(properties, ptsIn) {
+            var z_min = 0;
+            //  return 500;
+            for (i = 0; i < ptsIn.length; i+3) {
+                coord.set(view.referenceCrs, ptsIn[i], ptsIn[i + 1], ptsIn[i + 2]);
+                var elevation = itowns.DEMUtils.getElevationValueAt(view.tileLayer, coord, 0);
+                z_min = elevation > z_min ? elevation : z_min;
+            }
+            if (z_min !== undefined)
+                console.log(z_min);
+            return z_min + 100;
+            	// return 0;
             }
 
             function color() {
             	return new itowns.THREE.Color(0xffcc00);
             }
 
-            // var path ='https://raw.githubusercontent.com/gregoiredavid/france-geojson/master/departements/09-ariege/departement-09-ariege.geojson';
             var path = 'http://localhost:8080/examples/layers/JSONLayers/geojson.geojson';
+            var path = 'http://localhost:8080/examples/layers/JSONLayers/buildings.json';
             buildings = new itowns.GeometryLayer('buildings', new itowns.THREE.Group());
             buildings.update = itowns.FeatureProcessing.update;
             buildings.convert = itowns.Feature2Mesh.convert({
@@ -71,7 +81,7 @@
             	protocol: 'file',
             	projection: 'EPSG:4326',
             	format: 'application/json',
-            	zoom: { min: 2, max: 2 }
+            	zoom: { min: 0, max: 20 }
             };
             view.addLayer(buildings).then(function menue(layer){
             	var gui = debug.GeometryDebug.createGeometryDebugUI(menuGlobe.gui, view, layer);

@@ -286,17 +286,17 @@ function featureToExtrudedPolygon(feature, options) {
     vertices.minAltitude = Infinity;
 
     for (const geometry of feature.geometry) {
-        const altitude = getProperty('altitude', options, 0, geometry.properties);
-        const extrude = getProperty('extrude', options, 0, geometry.properties);
-        const colorTop = getProperty('color', options, randomColor, geometry.properties);
-        color.copy(colorTop);
-        color.multiplyScalar(0.6);
-
+        // console.log(geometry)
         const start = geometry.indices[0].offset;
         const lastIndice = geometry.indices.slice(-1)[0];
         const end = lastIndice.offset + lastIndice.count;
         const count = end - start;
 
+        const altitude = getProperty('altitude', options, 0, geometry.properties, ptsIn.slice(start, start + count));
+        const extrude = getProperty('extrude', options, 0, geometry.properties);
+        const colorTop = getProperty('color', options, randomColor, geometry.properties);
+        color.copy(colorTop);
+        color.multiplyScalar(0.6);
         coordinatesToVertices(ptsIn, normals, vertices, altitude, 0, start, count);
         fillColorArray(colors, count, color, start);
 
