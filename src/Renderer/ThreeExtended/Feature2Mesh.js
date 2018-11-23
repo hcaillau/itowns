@@ -334,6 +334,7 @@ function featureToExtrudedPolygon(feature, options) {
 
     const mesh = new THREE.Mesh(geom, material);
     mesh.minAltitude = vertices.minAltitude;
+    console.log(mesh);
     return mesh;
 }
 

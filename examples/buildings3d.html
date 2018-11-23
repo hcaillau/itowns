@@ -18,10 +18,10 @@
 	<script type="text/javascript">
 		/* global itowns,document,GuiTools, window, debug */
 		var buildings;
-		var menuGlobe;
-
-            // Define initial camera position
-            var positionOnGlobe = { longitude:6.419235954377663, latitude:46.077269189125, altitude: 10000 };
+        var menuGlobe;
+        
+              // Define initial camera position
+            var positionOnGlobe = { longitude:-2.779053157154393, latitude:48.513764469699041, altitude: 10000 };
 
             // `viewerDiv` will contain iTowns' rendering area (`<canvas>`)
             var viewerDiv = document.getElementById('viewerDiv');
@@ -48,16 +48,14 @@
             }
             var coord = new itowns.Coordinates('EPSG:4978', 0, 0, 0);
         function altitudeBuildings(properties, ptsIn) {
-            return 500;
+            return properties.z_min;
             }
 
             function color() {
             	return new itowns.THREE.Color(0xffcc00);
             }
 
-            var path = 'http://localhost:8080/examples/layers/JSONLayers/geojson.geojson';
             var path = 'http://localhost:8080/examples/layers/JSONLayers/buildings.json';
-            var path = 'http://localhost:8080/examples/layers/JSONLayers/dings.json';
             buildings = new itowns.GeometryLayer('buildings', new itowns.THREE.Group());
             buildings.update = itowns.FeatureProcessing.update;
             buildings.convert = itowns.Feature2Mesh.convert({

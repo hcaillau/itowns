@@ -83,7 +83,6 @@ export default {
             .replace('e', `${e},`)
             .replace('n', `${n},`)
             .slice(0, -1);
-
         return layer.url.replace('%bbox', bboxInUnit);
     },
 };
